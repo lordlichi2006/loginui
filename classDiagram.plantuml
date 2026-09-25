@@ -1,0 +1,52 @@
+@startuml
+   
+
+class LoginController {
+}
+class LoginView {
+}
+class UserDataController {
+}
+class UserDataView {
+}
+
+class User {
+    - name : String
+    - email : String
+    - password : String
+    - role : Role
+}
+
+enum Role {
+    USER
+    TEACHER
+    ADMIN
+}
+
+
+
+interface UserDao {
+    + login(email, password) : User
+    + getUsersWithLowerRole(role) : List<User>
+}
+
+class DaoImpBD {
+    + login(email, password) : User
+    + getUsersWithLowerRole(role) : List<User>
+}
+
+class DaoImpFichero {
+    + login(email, password) : User
+    + getUsersWithLowerRole(role) : List<User>
+}
+
+
+User -> Role
+
+LoginController -> LoginView
+UserDataController -> UserDataView
+
+UserDao <|.. DaoImpBD
+UserDao <|.. DaoImpFichero
+
+@enduml
