@@ -3,7 +3,7 @@ package com.dami.loginui.models;
 /**
  * User model 
  */
-public class User {
+public class User{
     private String name;
     private String email;
     private String password;
