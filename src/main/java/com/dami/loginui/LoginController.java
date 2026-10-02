@@ -5,6 +5,8 @@
 package com.dami.loginui;
 
 import com.dami.loginui.exception.ValidationException;
+import com.dami.loginui.models.Role;
+import com.dami.loginui.models.User;
 import com.dami.loginui.util.InputValidator;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,9 +44,9 @@ public class LoginController implements Initializable {
         try {
             String email = InputValidator.validateEmail(txtEmail.getText());
             String password = txtPassword.getText();
+
             
-            
-            
+
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }
