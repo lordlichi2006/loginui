@@ -4,6 +4,8 @@
  */
 package com.dami.loginui;
 
+import com.dami.loginui.dao.UserDAO;
+import com.dami.loginui.dao.UserDAOImplStatic;
 import com.dami.loginui.exception.ValidationException;
 import com.dami.loginui.models.Role;
 import com.dami.loginui.models.User;
@@ -14,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -24,31 +27,41 @@ import javafx.scene.control.TextField;
  */
 public class LoginController implements Initializable {
 
+    private UserDAO userDAO;
     @FXML
     private TextField txtEmail;
     @FXML
     private PasswordField txtPassword;
     @FXML
     private Button loginButton;
+    @FXML
+    private Label lblError;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        userDAO = new UserDAOImplStatic();
     }
 
     @FXML
     private void login(ActionEvent event) {
+        lblError.setText("");
         try {
             String email = InputValidator.validateEmail(txtEmail.getText());
-            String password = txtPassword.getText();
+            String password = InputValidator.validatePassword(txtPassword.getText());
 
-            
+            // if login is incorrect, it will throw an exception, past here the user has correctly logged in
+            User loggedUser = userDAO.login(email, password);
+
+            App.setRoot("UserDataView", loggedUser);
 
         } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
+            String text = "⚠ " + e.getMessage();
+            System.out.println(text);
+            lblError.setText(text);
+
         }
 
     }

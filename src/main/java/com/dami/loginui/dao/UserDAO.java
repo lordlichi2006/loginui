@@ -4,6 +4,8 @@
  */
 package com.dami.loginui.dao;
 
+import com.dami.loginui.exception.LoginException;
+import com.dami.loginui.models.Role;
 import com.dami.loginui.models.User;
 import java.util.List;
 
@@ -17,5 +19,7 @@ public interface UserDAO {
 
     List<User> getAll();
 
-    List<User> getAllBelowRole(String role);
+    List<User> getAllBelowRole(Role role);
+
+    User login(String email, String password) throws LoginException;
 }

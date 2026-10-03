@@ -13,7 +13,7 @@ import com.dami.loginui.exception.ValidationException;
 public class InputValidator {
 
     private static final String EMAIL_REGEX = "[\\w.+-]+@[\\w-]+(\\.[\\w-]+)+";
-    public static final int NAME_MAX_LENGTH = 100;
+    public static final int PASSWD_MAX_LENGTH = 100;
     public static final int EMAIL_MAX_LENGTH = 100;
 
     /**
@@ -26,12 +26,27 @@ public class InputValidator {
     public static String validateEmail(String email) throws ValidationException {
         String normalized = trim(email).toLowerCase();
         if (normalized.length() > EMAIL_MAX_LENGTH) {
-            throw new ValidationException("The email must have at most " + EMAIL_MAX_LENGTH + " characters.");
+            throw new ValidationException("The email field must have at most " + EMAIL_MAX_LENGTH + " characters.");
+        }
+        if (normalized.length() == 0) {
+            throw new ValidationException("The email field must not be empty.");
         }
         if (!normalized.matches(EMAIL_REGEX)) {
-            throw new ValidationException("The email is not valid (for example name@example.com).");
+            throw new ValidationException("The email field is not valid (for example name@example.com).");
         }
         return normalized;
+    }
+
+    public static String validatePassword(String password) throws ValidationException {
+        String normalized = trim(password).toLowerCase();
+        if (normalized.length() > PASSWD_MAX_LENGTH) {
+            throw new ValidationException("The password must have at most " + PASSWD_MAX_LENGTH + " characters.");
+        }
+        if (normalized.length() == 0) {
+            throw new ValidationException("The password field must not be empty.");
+        }
+        return normalized;
+
     }
 
     private static String trim(String value) {

@@ -1,14 +1,13 @@
 package com.dami.loginui.exception;
 
 /**
- * Thrown when a value entered by the user is not valid, for example an empty
- * name or a malformed email.
+ * Thrown when the user login fails
  *
  * @author Brayan
  * @author Ekaitz
  * @author Aritz
  */
-public class ValidationException extends Exception {
+public class LoginException extends Exception {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -16,7 +15,7 @@ public class ValidationException extends Exception {
      *
      * @param message the description of the invalid value
      */
-    public ValidationException(String message) {
+    public LoginException(String message) {
         super(message);
     }
 
@@ -26,7 +25,7 @@ public class ValidationException extends Exception {
      * @param message the description of the invalid value
      * @param cause   the original exception
      */
-    public ValidationException(String message, Throwable cause) {
+    public LoginException(String message, Throwable cause) {
         super(message, cause);
     }
 }

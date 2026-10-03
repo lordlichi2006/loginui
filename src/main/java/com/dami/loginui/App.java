@@ -1,5 +1,6 @@
 package com.dami.loginui;
 
+import com.dami.loginui.models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,13 +18,27 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("loginView"), 320, 240);
+        scene = new Scene(loadFXML("LoginView"), 320, 280);
         stage.setScene(scene);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
+    }
+
+    static void setRoot(String fxml, User user) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                App.class.getResource(fxml + ".fxml")
+        );
+
+        Parent root = fxmlLoader.load();
+
+        UserDataController controller = fxmlLoader.getController();
+        controller.setUser(user);
+
+        scene.setRoot(root);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
